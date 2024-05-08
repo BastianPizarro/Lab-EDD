@@ -1,0 +1,58 @@
+#include <stdio.h>
+
+// Función factorial recursiva
+int factorialRecursivo(int n) {
+    if (n == 0 || n == 1) {
+        return 1;
+    } else {
+        return n * factorialRecursivo(n - 1);
+    }
+}
+
+// Función factorial iterativa
+int factorialIterativo(int n) {
+    int resultado = 1;
+    for (int i = 2; i <= n; i++) {
+        resultado *= i;
+    }
+    return resultado;
+}
+
+// Función para determinar el mayor valor de n para el cual el factorial es correcto
+int mayorValorCorrecto() {
+    int n = 0;
+    while (factorialIterativo(n + 1) > 0) {
+        n++;
+    }
+    return n;
+}
+
+// Función factorial con manejo de errores
+int factorial(int n) {
+    if (n < 0) {
+        return 0; // Retorna 0 para valores negativos
+    } else {
+        int fact = factorialIterativo(n);
+        if (fact > 0) {
+            return fact;
+        } else {
+            return 0; // Retorna 0 cuando no se puede calcular el factorial
+        }
+    }
+}
+
+int main() {
+    // Comparación de ambas versiones
+    int num = 5;
+    printf("Factorial de %d (recursivo): %d\n", num, factorialRecursivo(num));
+    printf("Factorial de %d (iterativo): %d\n", num, factorialIterativo(num));
+
+    // Mayor valor de n para el cual se puede calcular el factorial correctamente
+    printf("El mayor valor de n para el cual el factorial es correcto es: %d\n", mayorValorCorrecto());
+
+    // Prueba con valores negativos y mayores al límite
+    printf("Factorial de -5: %d\n", factorial(-5)); // Retorna 0
+    printf("Factorial de 20: %d\n", factorial(20)); // Retorna 0
+
+    return 0;
+}
